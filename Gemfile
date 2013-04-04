@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
 gem 'bootstrap-sass', '2.1'
+gem 'bcrypt-ruby', '3.0.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -25,8 +26,15 @@ end
 
 gem 'jquery-rails', '2.0.2'
 
+group :development do
+	gem 'annotate', '2.5.0'
+end
+
 group :test do
 	gem 'capybara', '1.1.2'
+	gem 'factory_girl_rails', '4.1.0'
+  gem "cucumber-rails", "1.2.1", require: false
+  gem "database_cleaner", "0.7.0"
 end
 
 group :production do
