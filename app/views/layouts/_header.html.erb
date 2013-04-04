@@ -1,17 +1,17 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
 	<div class="navbar-inner">
 		<div class="container">
-			<!-- <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button> -->
-			<%= link_to "G. F. Johnson Golf", root_path, id: "logo", class: "brand" %>
-			<!-- <nav class="nav-collapse collapse"> -->
-				<ul class="nav pull-right">
-					<li><%= link_to "Home", root_path %></li>
-					<li><%= link_to "Products & Services", products_and_services_path %></li>
-					<li><%= link_to "Technology", technology_path %></li>
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "G. F. Johnson Golf", root_path, id: "logo", class: "brand" %>
+      <nav class="nav-collapse collapse">
+        <ul class="nav pull-right">
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Products & Services", products_and_services_path %></li>
+          <li><%= link_to "Technology", technology_path %></li>
           <% if signed_in? %>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -29,8 +29,9 @@
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>
           <% end %>
-				</ul>
-			<!-- </nav> -->
+        </ul>
+      </nav>
+      <!--/.nav-collapse -->
 		</div>
 	</div>
 </header>
