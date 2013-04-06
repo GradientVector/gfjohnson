@@ -40,6 +40,12 @@ textarea {
 	font-size: 4em;
 }
 
+@media (max-width: 480px) {
+  .hero-unit h1 {
+    font-size: 2em;
+  }
+}
+
 .container, .container-fluid {
   max-width: 1024px;
   margin-left: auto;
