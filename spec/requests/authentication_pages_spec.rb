@@ -4,6 +4,19 @@ describe "Authentication" do
   
   subject { page }
   
+  describe "not signed in" do  
+    before do
+      visit root_path
+    end
+    
+    describe "navigation links" do      
+      it { should_not have_link("Users", href: users_path) }
+      it { should_not have_link("Profile") }
+      it { should_not have_link("Settings") }
+      it { should_not have_link("Sign out", href: signout_path) }
+    end
+  end
+  
   describe "signin page" do
     before { visit signin_path }
     
@@ -32,12 +45,14 @@ describe "Authentication" do
       
       it { should have_selector("title", text: user.name) }
       
-      it { should have_link("Users", href: users_path) }
-      it { should have_link("Profile", href: user_path(user)) }
-      it { should have_link("Settings", href: edit_user_path(user)) }
-      it { should have_link("Sign out", href: signout_path) }
-      
-      it { should_not have_link("Sign in", href: signin_path) }
+      describe "navigation links" do          
+        it { should have_link("Users", href: users_path) }
+        it { should have_link("Profile", href: user_path(user)) }
+        it { should have_link("Settings", href: edit_user_path(user)) }
+        it { should have_link("Sign out", href: signout_path) }
+        
+        it { should_not have_link("Sign in", href: signin_path) }
+      end
       
       describe "followed by signout" do
         before { click_link "Sign out" }
@@ -61,8 +76,22 @@ describe "Authentication" do
         end
         
         describe "after signing in" do
+        
           it "should render the desired protected page" do
-            should have_selector("title", text: "Edit user")         
+            should have_selector("title", text: "Edit user")      
+          end
+          
+          describe "when signing in again" do
+            before do
+              # go ahead and sign out
+              delete signout_path
+              # then sign back in              
+              sign_in user              
+            end
+            
+            it "should render the default (profile) page" do
+              should have_selector("title", text: user.name)
+            end
           end
         end
       end
@@ -85,7 +114,25 @@ describe "Authentication" do
         end
       end
     end
-    
+
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before { sign_in user }
+            
+      describe "in the Users controller" do
+        
+        describe "visiting the signup page" do        
+          before { visit signup_path }
+          it { should_not have_selector("title", text: "Sign up") }
+        end
+        
+        describe "submitting to the create action" do
+          before { post users_path }
+          specify { response.should redirect_to(root_path) }
+        end
+      end
+    end
+   
     describe "as wrong user" do
       let(:user) { FactoryGirl.create(:user) }
       let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
@@ -111,6 +158,18 @@ describe "Authentication" do
       describe "submitting a DELETE request to the Users#destroy action" do
         before { delete user_path(user) }
         specify { response.should redirect_to(root_path) }
+      end
+    end
+    
+    describe "as admin user" do
+      let(:admin) { FactoryGirl.create(:admin) }
+      before { sign_in admin }
+      
+      describe "in the Users controller" do
+        describe "submitting to the destroy action" do
+          before { delete user_path(admin) }
+          specify { response.should redirect_to(root_path) }
+        end
       end
     end
   end
