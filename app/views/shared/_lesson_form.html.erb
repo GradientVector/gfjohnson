@@ -1,0 +1,11 @@
+<%= form_for(@lesson) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  
+  <%= f.label :occurs_at_date, "Date" %>
+  <%= f.text_field :occurs_at_date %>
+    
+  <%= f.label :occurs_at_time, "Time" %>
+  <%= f.text_field :occurs_at_time %>
+
+  <%= f.submit "Schedule", class: "btn btn-large btn-primary" %>
+<% end %>

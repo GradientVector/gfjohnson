@@ -28,6 +28,7 @@ describe User do
 	it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
+  it { should respond_to(:lessons) }
 	
 	# Methods
 	it { should respond_to(:authenticate) }
@@ -164,4 +165,29 @@ describe User do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
   end
+
+  describe "lesson associations" do
+    
+    before { @user.save }
+    let!(:older_lesson) do
+      FactoryGirl.create(:lesson, user: @user, occurs_at: 1.week.ago)
+    end
+    let!(:newer_lesson) do
+      FactoryGirl.create(:lesson, user: @user, occurs_at: 1.day.ago)
+    end
+    
+    it "should have the right lessons in the right order" do
+      @user.lessons.should == [newer_lesson, older_lesson]
+    end
+    
+    it "should destroy associated lessons" do
+      lessons = @user.lessons.dup
+      @user.destroy
+      lessons.should_not be_empty
+      lessons.each do |lesson|
+        Lesson.find_by_id(lesson.id).should be_nil
+      end
+    end
+  end
+  
 end

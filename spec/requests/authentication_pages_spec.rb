@@ -113,6 +113,19 @@ describe "Authentication" do
           it { should have_selector("title", text: "Sign in") }
         end
       end
+    
+      describe "in the Lessons controller" do
+        
+        describe "submitting to the create action" do
+          before { post lessons_path }
+          specify { response.should redirect_to(signin_path) }
+        end
+        
+        describe "submitting to the destroy action" do
+          before { delete lesson_path(FactoryGirl.create(:lesson)) }
+          specify { response.should redirect_to(signin_path) }
+        end
+      end
     end
 
     describe "for signed-in users" do
