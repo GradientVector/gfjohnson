@@ -68,9 +68,9 @@ describe "UserPages" do
 		it { should have_selector("title", text: user.name) }
     
     describe "lessons" do
-      it { should have_content(lesson1.occurs_at) }
-      it { should have_content(lesson2.occurs_at) }
       it { should have_content(user.lessons.count) }
+      it { should have_content(lesson1.date) }
+      it { should have_content(lesson2.date) }
     end
 	end
 	

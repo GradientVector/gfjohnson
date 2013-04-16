@@ -2,11 +2,14 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
 #
 
 require 'spec_helper'
@@ -170,10 +173,10 @@ describe User do
     
     before { @user.save }
     let!(:older_lesson) do
-      FactoryGirl.create(:lesson, user: @user, occurs_at: 1.week.ago)
+      FactoryGirl.create(:lesson, user: @user, date: 1.week.ago.to_date)
     end
     let!(:newer_lesson) do
-      FactoryGirl.create(:lesson, user: @user, occurs_at: 1.day.ago)
+      FactoryGirl.create(:lesson, user: @user, date: 1.day.ago.to_date)
     end
     
     it "should have the right lessons in the right order" do

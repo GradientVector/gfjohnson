@@ -11,9 +11,8 @@ FactoryGirl.define do
 	end
   
   factory :lesson do
-    datetime = DateTime.now
-    sequence(:occurs_at_date) { |n| (datetime + n.hours).to_date }
-    sequence(:occurs_at_time) { |n| (datetime + n.hours).to_time }
+    date = DateTime.now.to_date
+    sequence(:date) { |n| date + n.days }
     user
   end
 end

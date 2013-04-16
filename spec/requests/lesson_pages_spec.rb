@@ -11,6 +11,7 @@ describe "Lesson pages" do
     before { visit new_lesson_path }
     
     describe "with invalid information" do
+      before { fill_in "lesson_date", with: " " }
       
       it "should not create a lesson" do
         expect { click_button "Schedule" }.not_to change(Lesson, :count)
@@ -25,8 +26,8 @@ describe "Lesson pages" do
     describe "with valid information" do
     
       before do 
-        fill_in "lesson_occurs_at_date", with: "7/7/2013"    
-        fill_in "lesson_occurs_at_time", with: "3:30 PM"
+        fill_in "lesson_date", with: "7/7/2013"    
+        # fill_in "lesson_time", with: "3:30 PM"
       end
       
       it "should create a lesson" do

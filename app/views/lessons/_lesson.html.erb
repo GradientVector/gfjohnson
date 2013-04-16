@@ -1,12 +1,8 @@
 <li>
   <span class="datetime">
-    <%= time_tag(lesson.occurs_at, lesson.occurs_at.strftime("%B %d, %Y at %I:%M %p")) %>
+    <%= time_tag(lesson.date_time, lesson.formatted_date_time) %>
   </span>
   <span class="timestamp">
-    <% if lesson.occurs_at.past? %>
-      Occured <%= distance_of_time_in_words_to_now(lesson.occurs_at) %> ago.
-    <% else %>
-      Occurs <%= distance_of_time_in_words_to_now(lesson.occurs_at) %> from now.
-    <% end %>
+    <%= time_ago_in_words(lesson) %>
   </span>
 </li>

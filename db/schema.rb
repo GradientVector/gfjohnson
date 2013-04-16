@@ -15,13 +15,12 @@ ActiveRecord::Schema.define(:version => 20130412015524) do
 
   create_table "lessons", :force => true do |t|
     t.integer  "user_id"
-    t.date     "occurs_at_date"
-    t.time     "occurs_at_time"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "date_time"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "lessons", ["user_id", "occurs_at_date", "occurs_at_time"], :name => "index_lessons_on_user_id_and_occurs_at_date_and_occurs_at_time"
+  add_index "lessons", ["user_id", "date_time"], :name => "index_lessons_on_user_id_and_date_time"
 
   create_table "users", :force => true do |t|
     t.string   "name"
