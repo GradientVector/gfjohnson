@@ -58,5 +58,8 @@ module Gfjohnson
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # Add video folder to assets path
+    config.assets.paths << "#{Rails.root}/app/assets/videos"
   end
 end
