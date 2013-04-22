@@ -23,3 +23,7 @@ RSpec::Matchers.define :have_error_message do |message|
     page.should have_selector("div.alert.alert-error", text: message)
   end
 end
+
+def convert_date_to_string(date)
+  "#{date.month}/#{date.day}/#{date.year}"
+end

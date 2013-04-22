@@ -71,7 +71,7 @@ describe "Static pages" do
 		# Schedule a Lesson Link
 		click_link "Home"
 		click_link "Schedule a lesson today!"
-		page.should have_selector "title", text: full_title("Sign up")
+		page.should have_selector "title", text: full_title("Sign in")
 		
 	end
 end

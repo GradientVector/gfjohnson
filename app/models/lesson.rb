@@ -10,56 +10,49 @@
 #
 
 class Lesson < ActiveRecord::Base
-  attr_accessible :date
+  attr_accessor :date_string
+  attr_accessible :date_string
   belongs_to :user
   
-  after_initialize { self.date_time ||= DateTime.tomorrow }
-  
-  # before_save :combine_date_and_time
-  
-  validates :user_id, presence: true
-  validates :date_time, presence: true
-  # validates :time, presence: true
-  
-  default_scope order: 'lessons.date_time DESC'
-  
-  # Attributes
-  def date
-    formatted_date
-  end
-  
-  def date=(date)
-    begin
-      if date.nil?
-        self.date_time = nil
-      else
-        self.date_time = DateTime.strptime(date, "%m/%d/%Y")
-      end
-    rescue ArgumentError
-      self.date_time = nil
+  after_initialize do
+    if self.date_string.nil?
+      date = DateTime.tomorrow
+      self.date_string = "#{date.month}/#{date.day}/#{date.year}"
     end
   end
   
+  after_validation :combine_date_and_time
+  
+  validates :user_id, presence: true
+  VALID_DATE_STRING_REGEX = /\A\d\d?\/\d\d?\/\d\d\d\d\z/i
+  validates :date_string, presence: true,
+    format: { with: VALID_DATE_STRING_REGEX }
+  # VALID_TIME_STRING_REGEX = /\A(\d\d?):(\d\d)(am|pm) - (\d\d?):(\d\d)(am|pm)\z/i
+  # validates :time_string, presence: true,
+    # format: { with: VALID_TIME_STRING_REGEX }
+  
+  default_scope order: 'lessons.date_time DESC'
+      
   def formatted_date_time
     if self.date_time.nil?
       "Unknown date and time"
     else
-      self.date_time.strftime("%B %d, %Y at %I:%M %p")
+      self.date_time.strftime("%B %d, %Y")
+      #self.date_time.strftime("%B %d, %Y at %I:%M %p")
     end
-  end
-  
-  def formatted_date
-    if self.date_time.nil?
-      "Unknown date"
-    else  
-      self.date_time.strftime("%m/%d/%Y")
-    end
-  end
+  end  
     
-  # private  
-    # def combine_date_and_time
-      # d = date
-      # # t = time
-      # @date_time = DateTime.new(d.year, d.month, d.day)
-    # end
+  private      
+    def combine_date_and_time
+      if not date_string.nil?
+        begin
+          d = DateTime.strptime(date_string, "%m/%d/%Y")
+          # t = time
+          self.date_time = DateTime.new(d.year, d.month, d.day)     
+        rescue ArgumentError
+          self.date_time = nil
+        end
+      end
+    end
+        
 end

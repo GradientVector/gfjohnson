@@ -11,8 +11,12 @@ FactoryGirl.define do
 	end
   
   factory :lesson do
-    date = DateTime.now.to_date
-    sequence(:date) { |n| date + n.days }
+  
+    sequence(:date_string) do |n| 
+      date = DateTime.now + n.days
+      "#{date.month}/#{date.day}/#{date.year}"
+    end
+    
     user
   end
 end

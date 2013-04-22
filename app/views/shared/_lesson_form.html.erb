@@ -1,14 +1,14 @@
 <%= form_for(@lesson) do |f| %>
   <%= render "shared/error_messages", object: f.object %>
   
-  <%= f.label :date %>
-  <%= f.text_field :date %>   
+  <%= f.label :date_string, "Date" %>
+  <%= f.text_field :date_string %>   
 
   <%= f.submit "Schedule", class: "btn btn-large btn-primary" %>
 <% end %>
 
 <script>
   $(function() {
-    $( "#lesson_date" ).datepicker();
+    $( "#lesson_date_string" ).datepicker();
   });
 </script>

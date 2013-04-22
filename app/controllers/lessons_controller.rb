@@ -6,8 +6,10 @@ class LessonsController < ApplicationController
   end
   
   def create
+    #require 'debugger'; debugger
     @lesson = current_user.lessons.build(params[:lesson])
-    if @lesson.save
+    if (@lesson.valid? && ensure_date_and_time_are_valid(@lesson))    
+      @lesson.save
       flash[:success] = "Lesson scheduled!"
       redirect_to user_path(current_user)
     else

@@ -10,8 +10,24 @@ describe "Lesson pages" do
   describe "lesson creation" do
     before { visit new_lesson_path }
     
-    describe "with invalid information" do
-      before { fill_in "lesson_date", with: " " }
+    describe "with blank date" do
+      before { fill_in "lesson_date_string", with: " " }
+      
+      it "should not create a lesson" do
+        expect { click_button "Schedule" }.not_to change(Lesson, :count)
+      end
+      
+      describe "error messages" do
+        before { click_button "Schedule" }
+        it { should have_content("error") }
+      end    
+    end
+    
+    describe "with past date" do
+      before do 
+        date = 1.day.ago
+        fill_in "lesson_date_string", with: convert_date_to_string(date)
+      end
       
       it "should not create a lesson" do
         expect { click_button "Schedule" }.not_to change(Lesson, :count)
@@ -23,15 +39,57 @@ describe "Lesson pages" do
       end
     end
     
-    describe "with valid information" do
+    describe "with today's date" do
+      before do
+        date = DateTime.now
+        fill_in "lesson_date_string", with: convert_date_to_string(date) 
+      end
+      
+      it "should not create a lesson" do
+        expect { click_button "Schedule" }.not_to change(Lesson, :count)
+      end
+      
+      describe "error messages" do
+        before { click_button "Schedule" }
+        it { should have_content("error") }
+      end
+    end
     
-      before do 
-        fill_in "lesson_date", with: "7/7/2013"    
-        # fill_in "lesson_time", with: "3:30 PM"
+    describe "with tomorrow's date" do
+      before do
+        date = 1.day.from_now
+        fill_in "lesson_date_string", with: convert_date_to_string(date)
       end
       
       it "should create a lesson" do
         expect { click_button "Schedule" }.to change(Lesson, :count).by(1)
+      end   
+    end
+    
+    describe "with a date one year from now" do
+      before do
+        date = 1.year.from_now
+        fill_in "lesson_date_string", with: convert_date_to_string(date)
+      end
+      
+      it "should create a lesson" do
+        expect { click_button "Schedule" }.to change(Lesson, :count).by(1)
+      end
+    end
+    
+    describe "with a date more than one year from now" do
+      before do
+        date = 1.year.from_now + 1.day
+        fill_in "lesson_date_string", with: convert_date_to_string(date)
+      end
+      
+      it "should not create a lesson" do
+        expect { click_button "Schedule" }.not_to change(Lesson, :count)
+      end
+            
+      describe "error messages" do
+        before { click_button "Schedule" }
+        it { should have_content("error") }
       end
     end
   end

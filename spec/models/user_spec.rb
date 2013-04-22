@@ -172,15 +172,19 @@ describe User do
   describe "lesson associations" do
     
     before { @user.save }
-    let!(:older_lesson) do
-      FactoryGirl.create(:lesson, user: @user, date: 1.week.ago.to_date)
+    let!(:lesson_one_day_from_now) do
+      date = 1.day.from_now.to_date
+      FactoryGirl.create(:lesson, user: @user, 
+        date_string: convert_date_to_string(date))
     end
-    let!(:newer_lesson) do
-      FactoryGirl.create(:lesson, user: @user, date: 1.day.ago.to_date)
+    let!(:lesson_one_week_from_now) do
+      date = 1.week.from_now.to_date
+      FactoryGirl.create(:lesson, user: @user, 
+        date_string: convert_date_to_string(date))
     end
     
     it "should have the right lessons in the right order" do
-      @user.lessons.should == [newer_lesson, older_lesson]
+      @user.lessons.should == [lesson_one_week_from_now, lesson_one_day_from_now]
     end
     
     it "should destroy associated lessons" do

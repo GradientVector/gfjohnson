@@ -31,7 +31,7 @@ namespace :db do
       users.each do |user|
         50.times do |n|
           date = DateTime.now.to_date + n.days
-          user.lessons.create!(date: date)
+          user.lessons.create!(date_string: "#{date.month}/#{date.day}/#{date.year}")
         end
       end
     

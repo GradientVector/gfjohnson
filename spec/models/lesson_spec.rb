@@ -15,14 +15,15 @@ describe Lesson do
   
   let(:user) { FactoryGirl.create(:user) }
   before do 
-    @lesson = user.lessons.build(date: DateTime.now.to_date)
+    date = convert_date_to_string(DateTime.now)
+    @lesson = user.lessons.build(date_string: date)
   end
   
   subject { @lesson }
   
   it { should respond_to(:user_id) }
   it { should respond_to(:date_time) }
-  it { should respond_to(:date) }
+  it { should respond_to(:date_string) }
   it { should respond_to(:user) }
   its(:user) { should == user }
   
@@ -48,7 +49,7 @@ describe Lesson do
   end
 
   describe "with blank date" do
-    before { @lesson.date = nil }
+    before { @lesson.date_string = nil }
     it { should_not be_valid }
   end  
 

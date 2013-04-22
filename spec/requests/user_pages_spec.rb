@@ -69,8 +69,8 @@ describe "UserPages" do
     
     describe "lessons" do
       it { should have_content(user.lessons.count) }
-      it { should have_content(lesson1.date) }
-      it { should have_content(lesson2.date) }
+      it { should have_content(lesson1.formatted_date_time) }
+      it { should have_content(lesson2.formatted_date_time) }
     end
 	end
 	
