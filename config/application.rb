@@ -60,6 +60,6 @@ module Gfjohnson
     config.assets.version = '1.0'
     
     # Add video folder to assets path
-    config.assets.paths << "#{Rails.root}/app/assets/videos"
+    config.assets.paths << Rails.root.join("app", "assets", "videos")
   end
 end
