@@ -1,32 +1,21 @@
 <% provide(:title, "About") %>
 <h1>About</h1>
 
+<!-- PGA Professional -->
 <div class="row-fluid">
-	<ul class="thumbnails">
-		<li class="span4" style="min-width: 275px">
-			<div class="thumbnail">
-				<h3>What?</h3>
-				<p>I provide <%= link_to "lessons and clinics", products_and_services_path %> to help people achieve their goals and manage their expectations.</p>
-			</div>
-		</li>
-		<li class="span4" style="min-width: 275px">
-			<div class="thumbnail">
-				<h3>Why?</h3>
-				<p>I believe in helping people make the game of golf an enjoyable part of their lives.</p>
-			</div>
-		</li>
-		<li class="span4" style="min-width: 275px">
-			<div class="thumbnail">
-				<h3>How?</h3>
-				<p>I assess what golf means to each person and develop their goals.</p>
-			</div>
-		</li>		
-	</ul>
-</div>
+  
+  <div class="span4" style="min-width:250px">
+    <%= image_tag("PGA.jpg", alt: "PGA", class: "img-rounded") %>
+    <h2>Certified PGA Professional</h2>
+  </div>  
+  
+  <div class="span8" style="min-width:250px">
+    <h3>My Mission</h3>
+    <p>
+      Through golf lessons and clinics, I will assess what golf means 
+      to an individual and develop goals and expectations that will 
+      help each person experience the game of golf in a fun and exciting way.
+    </p>
+  </div>
 
-<h3>Mission Statement</h3>
-<p>
-	Through golf lessons and clinics, I will assess what golf means 
-	to an individual and develop goals and expectations that will 
-	help each person experience the game of golf in a fun and exciting way.
-</p>
+</div>

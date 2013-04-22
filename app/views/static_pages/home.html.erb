@@ -47,31 +47,31 @@
   <ul class="thumbnails">
     <li class="span4" style="min-width:250px;">
       <div class="thumbnail">
-        <%= link_to image_tag("PGA.jpg", alt: "PGA", class: "img-rounded"), "http://www.pga.com/home/", target: "_blank" %>
+        <%= link_to image_tag("PGA.jpg", alt: "PGA", class: "img-rounded"), about_path %>
         <h3>PGA</h3>
         <p>
-        Certied PGA Professional.
+          Certified PGA Professional.
         </p>
-        <p><a class="btn" href="http://www.pga.com/home/" target="_blank">Learn more &raquo;</a></p>
+        <%= link_to raw("About me &raquo;"), about_path, class: "btn" %>        
       </div>
     </li>
     <li class="span4" style="min-width:250px;">
       <div class="thumbnail">
-        <%= link_to image_tag("TrackMan_logo.png", alt: "Trackman Golf", class: "img-rounded"), products_and_services_path %>
+        <%= link_to image_tag("TrackMan_logo.png", alt: "Trackman Golf", class: "img-rounded"), technology_path %>
         <h3>Trackman Pro</h3>
         <p>The world's most trusted launch monitor. Allows for instant recording of ball flight and club swing data.</p>
-        <p><a class="btn" href="http://trackman.dk/Products/TrackMan-Pro.aspx" target="_blank">Learn more &raquo;</a></p>
+        <%= link_to raw("Learn more &raquo;"), technology_path , class: "btn" %>
       </div>
     </li>
     <li class="span4" style="min-width:250px;">
       <div class="thumbnail">
-        <%= link_to image_tag("Zenio.png", alt: "Zenio Sports", class: "img-rounded"), "#" %>
+        <%= link_to image_tag("Zenio.png", alt: "Zenio Sports", class: "img-rounded"), technology_path %>
         <h3>Zenio</h3>
         <p>ZENIO is a revolutionary new training and fitting system that 
         gives golfers immediate and accurate data on their putting in real 
         time and in real outdoor  conditions.
         </p>
-        <p><a class="btn" href="http://www.zeniosports.com" target="_blank">Learn more &raquo;</a></p>
+        <%= link_to raw("Learn more &raquo;"), technology_path, class:"btn" %>
       </div>
     </li>
   </ul>

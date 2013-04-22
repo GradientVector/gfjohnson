@@ -55,12 +55,30 @@ textarea {
   margin-right: auto;
 }
 
+.row, .row-fluid {
+  padding-bottom: 30px;
+}
+
 .thumbnail {
   padding: 10px;
 }
 
 caption {
   margin: 10px;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.video {
+  background: black;
+  width: 100%;
+}
+
+.foreign-link {
+  display: block
 }
 
 /* typography */
@@ -96,13 +114,17 @@ p {
 #logo {
   float: left;
   margin-right: 10px;
-  font-size: 1.7em;
+  /* font-size: 1.7em; */
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  line-height: 1;
+  padding: 0px;
+  img {  
+    height: 40px;
+  }
+  /* span.logo-text {
+    padding: 0px;
+  } */
   &:hover {
     color: white;
     text-decoration: none;
