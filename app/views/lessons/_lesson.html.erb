@@ -3,6 +3,13 @@
     <%= time_tag(lesson.date_time, lesson.formatted_date_time) %>
   </span>
   <span class="timestamp">
-    <%= time_ago_in_words(lesson) %>
+    <% if not lesson.date_time.past? %>
+      <i class="icon-star"></i>
+      <span class="text-warning">
+        <%= time_ago_in_words(lesson) %>
+      </span>
+    <% else %>
+      <%= time_ago_in_words(lesson) %>
+    <% end %>
   </span>
 </li>
