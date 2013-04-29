@@ -14,6 +14,5 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require bootstrap
-//= require lightbox
 //= require shadowbox
 //= require_tree .
