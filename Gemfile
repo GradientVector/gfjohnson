@@ -8,6 +8,8 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
 gem 'jquery-rails', '2.2.1' # '2.0.2'
 gem 'jquery-ui-sass-rails', '4.0.2.beta2'
+gem 'shadowbox-rails', '0.0.4'
+gem 'rubylight', '1.0.3.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
