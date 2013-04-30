@@ -50,5 +50,5 @@ test:
 production:
   <<: *common
   database: gfjohnson_production
-  username: test_app
-  password: 
+  username: gfjohnson
+  password: golf
