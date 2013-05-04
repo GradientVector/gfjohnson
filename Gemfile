@@ -9,12 +9,12 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'jquery-rails', '2.2.1' # '2.0.2'
 gem 'jquery-ui-sass-rails', '4.0.2.beta2'
 gem 'shadowbox-rails', '0.0.4'
+gem 'pg', '0.12.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
-	gem 'sqlite3', '1.3.5'
 	gem 'rspec-rails', '2.11.0'
 end
 
@@ -42,10 +42,6 @@ group :test do
   gem "database_cleaner", "0.7.0"
 end
 
-group :production do
-	gem 'pg', '0.12.2'
-end
-
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
@@ -53,7 +49,7 @@ end
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano', '1.3.0'
 
 # To use debugger
 # gem 'debugger'
