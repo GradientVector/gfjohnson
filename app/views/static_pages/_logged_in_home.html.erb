@@ -4,7 +4,11 @@
       <%= render "shared/user_info" %>      
     </section>
     <section>
-      <% #render "shared/lesson_form" %>
+      <%= link_to "Schedule a lesson", new_lesson_path, class: "btn btn-success" %>
+      <% # render "shared/lesson_form" %>
     </section>
   </aside>
+  <div class="span8">
+    <%= render "shared/lessons" %>
+  </div>
 </div>

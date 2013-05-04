@@ -43,7 +43,7 @@ describe "Authentication" do
       let(:user) { FactoryGirl.create(:user) }
       before { sign_in user }     
       
-      it { should have_selector("title", text: user.name) }
+      specify { current_path.should == root_path }
       
       describe "navigation links" do          
         it { should have_link("Users", href: users_path) }
@@ -89,8 +89,8 @@ describe "Authentication" do
               sign_in user              
             end
             
-            it "should render the default (profile) page" do
-              should have_selector("title", text: user.name)
+            it "should render the default (home) page" do
+               current_path.should == root_path
             end
           end
         end

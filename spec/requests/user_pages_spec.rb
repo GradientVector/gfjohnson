@@ -59,19 +59,11 @@ describe "UserPages" do
 	
 	describe "profile page" do
 		let(:user) { FactoryGirl.create(:user) }
-    let!(:lesson1) { FactoryGirl.create(:lesson, user: user) }
-    let!(:lesson2) { FactoryGirl.create(:lesson, user: user) }
     
 		before { visit user_path(user) }
 		
 		it { should have_selector("h1", text: user.name) }
-		it { should have_selector("title", text: user.name) }
-    
-    describe "lessons" do
-      it { should have_content(user.lessons.count) }
-      it { should have_content(lesson1.formatted_date_time) }
-      it { should have_content(lesson2.formatted_date_time) }
-    end
+		it { should have_selector("title", text: user.name) }    
 	end
 	
 	describe "signup" do

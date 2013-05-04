@@ -93,4 +93,17 @@ describe "Lesson pages" do
       end
     end
   end
+  
+  describe "lesson destruction" do
+    before { FactoryGirl.create(:lesson, user: user) }
+    
+    describe "as correct user" do
+      before { visit root_path }
+      
+      it "should delete a lesson" do
+        expect { click_link "cancel" }.to change(Lesson, :count).by(-1)
+      end
+    end
+  end
+  
 end

@@ -1,4 +1,4 @@
-<li>
+<li id="<%= lesson.id %>">
   <span class="datetime">
     <%= time_tag(lesson.date_time, lesson.formatted_date_time) %>
   </span>
@@ -12,4 +12,9 @@
       <%= time_ago_in_words(lesson) %>
     <% end %>
   </span>
+  <% if current_user?(lesson.user) %>
+    <%= link_to "cancel", lesson, method: :delete,
+                                  data: { confirm: "You sure?" },
+                                  title: "Cancel lesson" %>
+  <% end %>
 </li>

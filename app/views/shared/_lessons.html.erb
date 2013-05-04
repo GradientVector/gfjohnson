@@ -1,0 +1,10 @@
+<% if @lessons.any? %>
+  <h3>Lessons (<%= @lessons.count %>)</h3>
+  <ol class="lessons">
+    <%= render @lessons %>
+  </ol>
+  <%= will_paginate @lessons %>
+<% else %>
+  <h3>Lessons</h3>
+  <p>No lessons currently scheduled</p>
+<% end %>

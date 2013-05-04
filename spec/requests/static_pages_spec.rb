@@ -16,6 +16,22 @@ describe "Static pages" do
 		
 		it_should_behave_like "all static pages"
 		it { should_not have_selector("title", text: "| Home") }
+    
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:lesson, user: user)
+        FactoryGirl.create(:lesson, user: user)
+        sign_in user
+        visit root_path
+      end
+      
+      it "should render the user's lessons" do
+        user.lessons.each do |lesson|
+          page.should have_selector("li##{lesson.id}", text: lesson.formatted_date_time)
+        end
+      end
+    end
 	end
 	
 	describe "Products & Services page" do
