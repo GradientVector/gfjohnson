@@ -44,7 +44,7 @@ development:
 test:
   <<: *common
   database: gfjohnson_test
-  username: gfjohnson_tester
+  username: gfjohnson
   password: golf
 
 production:
