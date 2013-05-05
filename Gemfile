@@ -33,6 +33,9 @@ end
 group :development do
 	gem 'annotate', '2.5.0'
   gem 'debugger'
+  
+  # Deploy with Capistrano
+  gem 'capistrano', '1.3.0'
 end
 
 group :test do
@@ -47,9 +50,6 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
-
-# Deploy with Capistrano
-gem 'capistrano', '1.3.0'
 
 # To use debugger
 # gem 'debugger'
