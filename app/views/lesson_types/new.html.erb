@@ -1,0 +1,15 @@
+<% provide(:title, "New lesson type") %>
+<h1> New Lesson Type</h1>
+
+<div class="row-fluid">
+  <aside class="span6 offset3" style="min-width: 200px;">
+    <%= form_for(@lesson_type) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </aside>
+</div>

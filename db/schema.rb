@@ -11,13 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412015524) do
+ActiveRecord::Schema.define(:version => 20130513033526) do
+
+  create_table "lesson_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "lessons", :force => true do |t|
     t.integer  "user_id"
     t.datetime "date_time"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "lesson_type_id"
   end
 
   add_index "lessons", ["user_id", "date_time"], :name => "index_lessons_on_user_id_and_date_time"
