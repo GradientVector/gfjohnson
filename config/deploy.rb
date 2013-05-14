@@ -1,6 +1,6 @@
 # RVM
 require "rvm/capistrano"
-set :rvm_ruby_string, 'default'
+set :rvm_ruby_string, :local
 
 # Bundler
 require "bundler/capistrano"
