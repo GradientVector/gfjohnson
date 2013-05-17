@@ -7,8 +7,8 @@ namespace :db do
   
       # Create an admin user
       puts "---=== Creating an admin user ===---"
-      admin = User.create!(name: "Example User",
-        email: "example@railstutorial.org",
+      admin = User.create!(name: "George Johnson",
+        email: "golf@gfjohnson.com",
         password: "foobar",
         password_confirmation: "foobar")
       admin.toggle!(:admin)
@@ -27,7 +27,7 @@ namespace :db do
       
       # Create lessons for users
       puts "---=== Creating lessons for users ===---"
-      users = User.all(limit: 6)    
+      users = User.where("admin = ?", false).limit(6)    
       users.each do |user|
         10.times do |n|
           date = DateTime.now.to_date + n.days

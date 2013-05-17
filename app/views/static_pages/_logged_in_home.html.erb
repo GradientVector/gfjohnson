@@ -3,10 +3,12 @@
     <section>
       <%= render "shared/user_info" %>      
     </section>
-    <section>
-      <%= link_to "Schedule a lesson", new_lesson_path, class: "btn btn-success" %>
-      <% # render "shared/lesson_form" %>
-    </section>
+    <% if !current_user.admin? %>
+      <section>
+        <%= link_to "Schedule a lesson", new_lesson_path, class: "btn btn-success" %>
+        <% # render "shared/lesson_form" %>
+      </section>
+    <% end %>
   </aside>
   <div class="span8">
     <%= render "shared/lessons" %>
