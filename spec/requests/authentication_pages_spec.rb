@@ -134,6 +134,11 @@ describe "Authentication" do
             
       describe "in the Users controller" do
         
+        describe "visiting the index page" do
+          before { visit users_path }
+          it { should_not have_selector("title", "All users") }
+        end
+
         describe "visiting the signup page" do        
           before { visit signup_path }
           it { should_not have_selector("title", text: "Sign up") }
@@ -151,6 +156,11 @@ describe "Authentication" do
       let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
       before { sign_in user }
       
+      describe "visiting Users#show page" do
+        before { visit user_path(wrong_user) }
+        it { should_not have_selector("title", text: full_title(wrong_user.name)) }
+      end
+
       describe "visiting Users#edit page" do
         before { visit edit_user_path(wrong_user) }
         it { should_not have_selector("title", text: full_title("Edit user")) }
@@ -179,7 +189,13 @@ describe "Authentication" do
       before { sign_in admin }
       
       describe "in the Users controller" do
-        describe "submitting to the destroy action" do
+
+        describe "visiting Users#index page" do
+          before { visit users_path }
+          it { should have_selector("title", text: full_title("All users")) }
+        end
+
+        describe "submitting to the destroy action on yourself" do
           before { delete user_path(admin) }
           specify { response.should redirect_to(root_path) }
         end

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_filter :not_signed_in_user, only: [:new, :create]
-	before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
-  before_filter :correct_user, only: [:edit, :update]
-  before_filter :admin_user, only: :destroy
+	before_filter :signed_in_user, only: [:show, :index, :edit, :update, :destroy]
+  before_filter :correct_user_or_admin, only: [:show, :edit, :update]
+  before_filter :admin_user, only: [:index, :destroy]
   before_filter :not_current_user, only: :destroy
   
   def index
@@ -10,7 +10,6 @@ class UsersController < ApplicationController
   end
   
 	def show
-		@user = User.find(params[:id])
 	end
 	
 	def new
@@ -56,9 +55,9 @@ class UsersController < ApplicationController
       redirect_to(root_path) unless not signed_in?
     end
 
-    def correct_user
+    def correct_user_or_admin
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_path) unless (current_user?(@user) or current_user.admin?)
     end
     
     def not_current_user
