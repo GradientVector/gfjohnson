@@ -1,0 +1,22 @@
+<%= provide(:title, "All private lesson package types") %>
+<h1>All private lesson package types</h1>
+
+<div class="row-fluid">
+  <div class="span6 offset3" style="min-width: 300px;">
+    <%= will_paginate %>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Duration</th>
+          <th>Cost ($)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <%= render @private_lesson_package_types %>
+    </table>
+
+    <%= will_paginate %>
+  </div>
+</div>

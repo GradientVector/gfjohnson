@@ -1,0 +1,9 @@
+<tr>
+  <td><%= private_lesson_package_type.name %></td>
+  <td><%= private_lesson_package_type.duration_in_minutes %></td>
+  <td><%= private_lesson_package_type.cost_in_dollars %></td>
+  <td>
+    <%= link_to "delete", private_lesson_package_type, method: :delete,
+      data: {confirm: "Are you sure?" }, title: "Deactivate private lesson package type" %>
+  </td>
+</tr>

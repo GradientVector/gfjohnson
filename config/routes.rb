@@ -3,6 +3,7 @@ Gfjohnson::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :lessons, only: [:new, :create, :destroy]
   resources :lesson_types, only: [:new, :create, :destroy]
+  resources :private_lesson_package_types, only: [:new, :create, :index, :destroy]
 
 	root to: "static_pages#home"
 	

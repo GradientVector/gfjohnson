@@ -19,4 +19,10 @@ FactoryGirl.define do
     
     user
   end
+
+  factory :private_lesson_package_type do
+    sequence(:name) { |n| "Private Lesson Package #{n}" }
+    duration_in_minutes 45
+    cost_in_dollars 100
+  end
 end

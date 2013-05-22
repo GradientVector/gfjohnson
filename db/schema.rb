@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513033526) do
+ActiveRecord::Schema.define(:version => 20130522022640) do
 
   create_table "lesson_types", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(:version => 20130513033526) do
   end
 
   add_index "lessons", ["user_id", "date_time"], :name => "index_lessons_on_user_id_and_date_time"
+
+  create_table "private_lesson_package_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "duration_in_minutes"
+    t.integer  "cost_in_dollars"
+    t.boolean  "is_active",           :default => true
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

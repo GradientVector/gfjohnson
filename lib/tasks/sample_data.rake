@@ -5,6 +5,28 @@ namespace :db do
   
     ActiveRecord::Base.transaction do # beginning of transaction
   
+      # Create private lesson package types
+      puts "---=== Creating private lesson package types ===---"
+      private_lesson_package_type_hashes =
+        [ { name: "1 private lesson",
+            duration_in_minutes: 45,
+            cost_in_dollars: 85 },
+          { name: "3 lesson pack",
+            duration_in_minutes: 45,
+            cost_in_dollars: 240 },
+          { name: "5 lesson pack",
+            duration_in_minutes: 45,
+            cost_in_dollars: 375 },
+          { name: "10 lesson pack",
+            duration_in_minutes: 45,
+            cost_in_dollars: 700 },
+          { name: "Private golf school",
+            duration_in_minutes: 240,
+            cost_in_dollars: 200 } ]
+      private_lesson_package_type_hashes.each do |hash|
+        PrivateLessonPackageType.create(hash)
+      end
+
       # Create an admin user
       puts "---=== Creating an admin user ===---"
       admin = User.create!(name: "George Johnson",

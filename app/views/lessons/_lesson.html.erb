@@ -14,7 +14,7 @@
   </span>
   <% if current_user?(lesson.user) %>
     <%= link_to "cancel", lesson, method: :delete,
-                                  data: { confirm: "You sure?" },
-                                  title: "Cancel lesson" %>
+      data: { confirm: "Are you sure?" },
+      title: "Cancel lesson" %>
   <% end %>
 </li>

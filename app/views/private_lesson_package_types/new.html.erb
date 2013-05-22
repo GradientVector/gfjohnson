@@ -1,0 +1,21 @@
+<%= provide(:title, "New private lesson package type") %>
+<h1> New Private Lesson Package Type</h1>
+
+<div class="row-fluid">
+  <aside class="span6 offset3" style="min-width: 200px;">
+    <%= form_for(@private_lesson_package_type) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :duration_in_minutes %>
+      <%= f.number_field :duration_in_minutes, min: 0 %>
+
+      <%= f.label :cost_in_dollars %>
+      <%= f.number_field :cost_in_dollars, min: 0 %>
+
+      <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </aside>
+</div>
