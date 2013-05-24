@@ -125,6 +125,32 @@ describe "Authentication" do
           specify { response.should redirect_to(signin_path) }
         end
       end
+
+      describe "in the PrivateLessonPackageTypes controller" do
+
+        describe "visiting the index page" do
+          before { visit private_lesson_package_types_path }
+          it { should have_selector("title", text: "Sign in") }
+        end
+        
+        describe "visiting the new page" do
+          before { visit new_private_lesson_package_type_path }
+          it { should have_selector("title", text: "Sign in") }
+        end
+
+        describe "submitting to the create action" do
+          before { post private_lesson_package_types_path } 
+          specify { response.should redirect_to(signin_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before do
+            plpt = FactoryGirl.create(:private_lesson_package_type) 
+            delete private_lesson_package_type_path(plpt) 
+          end
+          specify { response.should redirect_to(signin_path) }
+        end
+      end
     end
 
     describe "for signed-in users" do
@@ -180,9 +206,23 @@ describe "Authentication" do
         it { should_not have_link("Users", href: users_path) }
       end
 
-      describe "submitting a DELETE request to the Users#destroy action" do
-        before { delete user_path(user) }
-        specify { response.should redirect_to(root_path) }
+      describe "in the Users controller" do
+        
+        describe "submitting a DELETE request to the destroy action" do
+          before { delete user_path(user) }
+          specify { response.should redirect_to(root_path) }
+        end
+      end
+
+      describe "in the PrivateLessonPackageTypes controller" do
+
+        describe "submitting a DELETE request to the destroy action" do
+          before do
+            plpt = FactoryGirl.create(:private_lesson_package_type)
+            delete private_lesson_package_type_path(plpt) 
+          end
+          specify { response.should redirect_to(root_path) }
+        end
       end
     end
     
