@@ -22,6 +22,10 @@ module SessionsHelper
     user == current_user
   end
     
+  def current_user_is_admin?
+    current_user.admin?
+  end
+
   def signed_in_user
     unless signed_in?
       store_location
