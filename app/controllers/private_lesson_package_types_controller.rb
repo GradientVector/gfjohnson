@@ -25,10 +25,8 @@ class PrivateLessonPackageTypesController < ApplicationController
 
   def destroy
     @private_lesson_package_type = PrivateLessonPackageType.find(params[:id])
-    @private_lesson_package_type.is_active = false
-    if (@private_lesson_package_type.save)
-      flash[:success] = "Private lesson package type deactivated"
-    end
+    @private_lesson_package_type.toggle!(:is_active)
+    flash[:success] = "Private lesson package type deactivated"
     redirect_to private_lesson_package_types_url
   end
 end

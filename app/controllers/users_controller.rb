@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_filter :not_current_user, only: :destroy
   
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate(page: params[:page]).where("is_active = true")
   end
   
 	def show
@@ -43,8 +43,8 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    @user.destroy
-    flash[:success] = "User destroyed."
+    @user.toggle!(:is_active)
+    flash[:success] = "User destroyed"
     redirect_to users_url
   end
   

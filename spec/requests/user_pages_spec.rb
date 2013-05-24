@@ -32,6 +32,15 @@ describe "UserPages" do
       end
     end
 
+    describe "only shows active users" do
+      let!(:active_user) { FactoryGirl.create(:user) }
+      let!(:inactive_user) { FactoryGirl.create(:user, is_active: false) }
+      before { visit users_path }
+      
+      it { should have_selector("li", text: active_user.name) }
+      it { should_not have_selector("li", text: inactive_user.name) }
+    end
+
     describe "delete links" do          
 
       let!(:user) { FactoryGirl.create(:user) }
@@ -42,7 +51,13 @@ describe "UserPages" do
 
       it { should have_link("delete", href: user_path(user)) }
       it "should be able to delete another user" do
-        expect { click_link "delete" }.to change(User, :count).by(-1)
+        expect { click_link "delete" }.not_to change(User, :count)
+      end
+      describe "after clicking link" do
+        before do
+          click_link "delete"
+        end
+        it { should_not have_link("delete", href: user_path(user)) }
       end
       it { should_not have_link("delete", href: user_path(admin)) }
     end
