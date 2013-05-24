@@ -11,6 +11,7 @@ class StaticPagesController < ApplicationController
 	end
 	
 	def products_and_services
+    @private_lesson_package_types = PrivateLessonPackageType.where("is_active = true")
 	end
 	
 	def technology

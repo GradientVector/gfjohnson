@@ -11,44 +11,19 @@
 					<th>Cost ($)</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>1 private lesson</td>
-					<td>45 mins</td>
-					<td>85</td>
-				</tr>
-				<tr>
-					<td>3 Lesson Pack</td>
-					<td>45 mins</td>
-					<td>240</td>
-				</tr>
-				<tr>
-					<td>5 Lesson Pack</td>
-					<td>45 mins</td>
-					<td>375</td>
-				</tr>
-				<tr>
-					<td>10 Lesson Pack</td>
-					<td>45 mins</td>
-					<td>700</td>
-				</tr>
-				<tr>
-					<td>1 Group Lesson</td>
-					<td>60 mins</td>
-					<td>100 (Up to 4 People)</td>
-				</tr>
-				<tr>
-					<td>Private Golf School</td>
-					<td>4 hours</td>
-					<td>200</td>
-				</tr>
-				<tr>
-					<td>Club Fitting</td>
-					<td>45 mins</td>
-					<td>85</td>
-				</tr>
+      <tbody>
+        <% for private_lesson_package_type in @private_lesson_package_types %>
+				  <tr>
+            <td><%= private_lesson_package_type.name %></td>
+            <td><%= private_lesson_package_type.duration_in_minutes %></td>
+            <td><%= private_lesson_package_type.cost_in_dollars %></td>
+				  </tr>
+        <% end %>
 			</tbody>
 		</table>
+    <% if signed_in? and current_user_is_admin? %>
+      <%= link_to "Edit", private_lesson_package_types_path, title: "Edit private lesson package types", class: "btn btn-success" %>
+    <% end %>
 	</div>
 	<div class="span6" style="min-width: 300px;">
 		<table class="table table-striped table-bordered table-hover">

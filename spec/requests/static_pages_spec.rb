@@ -61,11 +61,44 @@ describe "Static pages" do
   end
 
   describe "Products & Services page" do
-    before { visit products_and_services_path }
     let(:heading) { "Products & Services" }
     let(:page_title) { "Products and Services" }
+    let!(:active_private_lesson_package_type) do
+      FactoryGirl.create(:private_lesson_package_type)
+    end
+    let!(:inactive_private_lesson_package_type) do
+      FactoryGirl.create(:private_lesson_package_type, is_active: false)
+    end
+    before { visit products_and_services_path }
 
     it_should_behave_like "all static pages"
+
+    it "should render the active private lesson package types" do
+      page.should have_selector("tr", text: active_private_lesson_package_type.name)
+    end
+    it "should not render the inactive private lesson package types" do
+      page.should_not have_selector("tr", text: inactive_private_lesson_package_type.name)
+    end
+
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        sign_in user
+        visit products_and_services_path 
+      end
+
+      it { should_not have_link("Edit", href: private_lesson_package_types_path) }
+    end
+
+    describe "for admin users" do
+      let(:admin) {FactoryGirl.create(:admin) }
+      before do
+        sign_in admin
+        visit products_and_services_path
+      end
+
+      it { should have_link("Edit", href: private_lesson_package_types_path) }
+    end
   end
 
   describe "Technology page" do
