@@ -9,7 +9,12 @@ class LessonsController < ApplicationController
   def create
     #require 'debugger'; debugger
     @lesson = current_user.lessons.build(params[:lesson])
-    if (@lesson.valid? && ensure_date_and_time_are_valid(@lesson))    
+    @website_settings = WebsiteSettings.first
+    @website_settings ||= WebsiteSettings.new
+    if (!@website_settings.allow_lesson_request)
+      flash[:warning] = "Sorry, we are not taking lesson request through the web at this time. This feature should be available in the near future."
+      render "new"
+    elsif (@lesson.valid? && ensure_date_and_time_are_valid(@lesson))    
       @lesson.save
       flash[:success] = "Lesson scheduled!"
       redirect_to root_url

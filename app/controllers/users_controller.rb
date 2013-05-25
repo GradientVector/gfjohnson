@@ -18,7 +18,12 @@ class UsersController < ApplicationController
 	
   def create
     @user = User.new(params[:user])
-    if @user.save
+    @website_settings = WebsiteSettings.first
+    @website_settings ||= WebsiteSettings.new
+    if (!@website_settings.allow_user_signup)
+      flash[:warning] = "Sorry, we are not currently allowing new users to signup. This feature should be available in the near future."
+      render "new"
+    elsif @user.save
       # Handle a successful save.
       sign_in @user
       flash[:success] = "Welcome to G. F. Johnson Golf!"

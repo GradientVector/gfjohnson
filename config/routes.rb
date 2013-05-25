@@ -4,6 +4,7 @@ Gfjohnson::Application.routes.draw do
   resources :lessons, only: [:new, :create, :destroy]
   resources :lesson_types, only: [:new, :create, :destroy]
   resources :private_lesson_package_types, only: [:new, :create, :index, :destroy]
+  resources :website_settings, only: [:index, :edit, :update]
 
 	root to: "static_pages#home"
 	
@@ -15,6 +16,9 @@ Gfjohnson::Application.routes.draw do
 	match "/technology", to: "static_pages#technology"
 	match "/about", to: "static_pages#about"
 	match "/contact", to: "static_pages#contact"
+
+  # match "/website_settings/edit", to: "website_settings#edit"
+  # match "/website_settings/update", to: "website_settings#update" 
 	
   # The priority is based upon order of creation:
   # first created -> highest priority.

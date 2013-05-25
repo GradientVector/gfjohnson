@@ -1,0 +1,17 @@
+<%= provide(:title, "Edit website settings") %>
+<h1>Update website settings</h1>
+
+<div class="row-fluid">
+  <div class="span6 offset3">
+    <%= form_for(@website_settings) do |f| %>
+
+      <%= f.check_box :allow_lesson_request %>
+      <%= f.label :allow_lesson_request  %>
+
+      <%= f.check_box :allow_user_signup %>
+      <%= f.label :allow_user_signup %>
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
