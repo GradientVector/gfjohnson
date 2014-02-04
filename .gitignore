@@ -1,3 +1,6 @@
 log/
 spec/
 tmp/
+*.swp
+*.swo
+*~
